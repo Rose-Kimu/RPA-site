@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        body{
+            font-family: 'poppins', sans-serif;
+            background: rgb(187, 166, 148);
+            /* background: rgb(212, 114, 58); */
+            box-sizing: border-box;
+            margin: 0;
+
+        }
+
+        .nav-container{
+            background: rgb(212, 114, 58);
+            color: white;
+            padding: 0.5px 20px;
+            margin-bottom: 50px;
+       }
+
+       .nav-container h5{
+        font-size: 1.5rem;
+       }
+
+        .login-container{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* max-height: 700px; Set the maximum height for scrolling */
+            /* overflow-y: auto; */
+
+        }
+        .login-form{
+            width: 50%;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            padding: 16px 40px;
+            border-radius: 25px;
+        }
+
+        input, button, textarea, #selectMenu{
+            margin: 10px 0;
+            outline: none;
+            border: none;
+            background: #f5f5f5;
+        }
+
+        form input, form textarea, #selectMenu{
+            padding: 20px;
+            /* background-color: pink; */
+            border-radius: 10px;
+        }
+
+        .submit-button, .cancel-button{
+            width: 30%;
+            border-radius: 20px;
+            padding: 10px;
+            outline: none;
+            
+            border: none;
+            margin-top: 30px;
+        }
+
+        .submit-button{
+            background:rgb(212, 114, 58);
+            color: white;
+        }
+
+        .cancel-button{
+            background:white;
+            color:rgb(212, 114, 58) ;
+            border: 1px solid  rgb(212, 114, 58);
+        }
+
+       form .header{
+        margin-left: auto;
+        margin-right: auto;
+       }
+
+       .buttons{
+        display: flex;
+        gap: 50px;
+       }
+
+      
+
+        
+    </style>
+</head>
+<body>
+    <div class="nav-container">
+        <nav>
+            <h5>RPA Exercise</h5>
+        </nav>
+    </div>
+    <div class="login-container">
+        <form class="login-form" action="" method="post">
+            <!-- <div class="header">
+                <h3 class="header"> New Expense report</h3>
+            </div> -->
+            {% csrf_token %}
+            {{form}}
+
+            <input id="expense-id" name="expense-id" type="text" placeholder="Expense ID" value="{{ form.expense_id }}">
+
+            <input  id="employee-name" name="employee-name" type="text" placeholder=" Employee Name" value="{{form.employee_name.value}}"/>
+            <input  id="expense-category" name="" type="text" placeholder=" Expense Category" value="{{form.expense_category.value}}"/>
+
+            <textarea  name="expense-description" id="expense-description" rows="4"  placeholder="Expense description">{{ form.description}}</textarea>
+
+            <label for="selectMenu"></label>
+            <select id="selectMenu" name="dropdown"> 
+                <option value="option1">{{ form.currency}}</option>
+            </select>
+
+            <input  id=" amount" name="" type="text" placeholder="Amount" value="{{form.amount.value}}"/>
+            <input  id="date" name="date" type="date" placeholder="" value="{{form.date.value}}"/>
+
+            
+
+            <p>Receipt:</p>
+            <label>
+                <input type="radio" name="receipt" value="yes" {% if form.receipt.value == 'yes' %}checked{% endif %} >
+                Yes
+            </label>
+          
+            <label>
+                <input type="radio" name="receipt" value="no" {% if form.receipt.value == 'no' %}checked{% endif %}>
+                No
+            </label>
+            
+
+            <div class="buttons">
+                <button class="cancel-button">Cancel</button>
+                <button type="submit" class="submit-button">Submit</button>
+            </div>
+
+    
+            
+        </form>
+    </div>
+    
+    
+</body>
+</html>

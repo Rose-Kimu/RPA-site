@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        body{
+            font-family: 'poppins', sans-serif;
+            /* background: rgb(187, 166, 148); */
+            /* background: rgb(212, 114, 58); */
+            box-sizing: border-box;
+            margin: 0;
+
+        }
+
+        .nav-container{
+            background: rgb(212, 114, 58);
+            color: white;
+            padding: 0.5px 20px;
+            margin-bottom: 50px;
+       }
+
+       .nav-container h5{
+        font-size: 1.5rem;
+       }
+        table{
+            /* border: 1px solid; */
+            width: 100%;
+            height: 10px;
+            text-align: left;
+            border-collapse: collapse;
+        }
+        td,th{
+            padding: 12px;
+        }
+
+        /* Hoverable table */
+        tr:hover{
+            /* background-color: brown; */
+        }
+
+        /* Striped tables */
+        tr:nth-child(odd){
+            background-color: #f2f2f2;
+        }
+
+        /* Bg color and text color of h2 elements */
+        th{
+            background-color:rgb(212, 114, 58) ;
+            color: white;
+        }
+        
+        .btn-flag, .btn-okay{
+            /* width: 20%; */
+            border-radius: 10px;
+            padding: 10px;
+            outline: none;
+            
+            border: none;
+        }
+
+
+        .btn-flag{
+            background:rgb(212, 114, 58);
+            color: white;
+        }
+
+        .btn-okay{
+            background:white;
+            color:rgb(212, 114, 58) ;
+            border: 1px solid  rgb(212, 114, 58);
+        }
+
+        .nav-bar{
+        display: flex;
+        align-items: center;
+        /* justify-content: space-between; */
+       }
+
+       .nav-bar h5{
+        margin-right: auto;
+       }
+
+       .nav-bar h4{
+        margin-right: 20px;
+       }
+
+       a{
+        text-decoration: none;
+        color: white;
+       }
+
+
+
+
+    </style>
+</head>
+
+<body>
+    
+    <div class="nav-container">
+ 
+
+        <nav class="nav-bar">
+            <h5>RPA Exercise</h5>
+            <h4> <a href="{% url 'login_user' %}"> Home</a></h4>
+            <h4> <a href="{% url 'add_report_btn' %}"> Add new expense report</a></h4>
+            <h4> <a href= "{% url 'view_all_reports' %}">View all expense reports</a></h4>
+        </nav>
+    </div>
+
+    <div class="list-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Expense ID</th>
+                    <th> Employee Name</th>
+                    <th> Expense Category</th>
+                    <th> Description</th>
+                    <th> Currency</th>
+                    <th> Amount</th>
+                    <th> Date</th>
+                    <th> Receipt</th>
+                    <th>Decision</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            
+                {% for report in reports %}
+               
+                <tr>
+                    <td> {{ report.expense_id }} </td>
+                    <td> {{ report.employee_name }} </td>
+                    <td> {{report.expense_category }} </td>
+                    <td> {{ report.description }} </td>
+                    <td> {{ report.currency }} </td>
+                    <td> {{ report.amount}} </td>
+                    <td> {{ report.date}} </td>
+                    <td> {{report.receipt }} </td>
+                    <td>
+                        <button class="btn-flag">Flag</button>
+                        <button class="btn-okay">Okay</button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                  <!-- Sample row 2 -->
+                  <!-- <tr>
+                    <td>2</td>
+                    <td>Jane Smith</td>
+                    <td>Meals</td>
+                    <td>Dinner with clients</td>
+                    <td>EUR</td>
+                    <td>120.50</td>
+                    <td>2024-01-19</td>
+                    <td>No</td>
+                    <td>
+                        <button class="btn-flag">Flag</button>
+                        <button class="btn-okay">Okay</button>
+                    </td>
+                  </tr>
+            
+                
+                  <tr>
+                    <td>3</td>
+                    <td>Bob Johnson</td>
+                    <td>Accommodation</td>
+                    <td>Hotel stay</td>
+                    <td>GBP</td>
+                    <td>300.00</td>
+                    <td>2024-01-20</td>
+                    <td>Yes</td>
+                    <td>
+                        <button class="btn-flag">Flag</button>
+                        <button class="btn-okay">Okay</button>
+                    </td>
+                  </tr>
+            
+               
+                  <tr>
+                    <td>4</td>
+                    <td>Alice Brown</td>
+                    <td>Transportation</td>
+                    <td>Taxi fare</td>
+                    <td>USD</td>
+                    <td>40.00</td>
+                    <td>2024-01-21</td>
+                    <td>No</td>
+                    <td>
+                        <button class="btn-flag">Flag</button>
+                        <button class="btn-okay">Okay</button>
+                    </td>
+                  </tr>
+            
+                 
+                  <tr>
+                    <td>5</td>
+                    <td>Michael White</td>
+                    <td>Entertainment</td>
+                    <td>Concert tickets</td>
+                    <td>EUR</td>
+                    <td>75.00</td>
+                    <td>2024-01-22</td>
+                    <td>Yes</td>
+                    <td>
+                        <button class="btn-flag">Flag</button>
+                        <button class="btn-okay">Okay</button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>6</td>
+                    <td>John Doe</td>
+                    <td>Travel</td>
+                    <td>Flight tickets</td>
+                    <td>USD</td>
+                    <td>500.00</td>
+                    <td>2024-01-18</td>
+                    <td>Yes</td>
+                    <td>
+                        <button class="btn-flag">Flag</button>
+                        <button class="btn-okay">Okay</button>
+                    </td>
+                  </tr>
+            
+             
+                  <tr>
+                    <td>7</td>
+                    <td>Jane Smith</td>
+                    <td>Meals</td>
+                    <td>Dinner with clients</td>
+                    <td>EUR</td>
+                    <td>120.50</td>
+                    <td>2024-01-19</td>
+                    <td>No</td>
+                    <td>
+                        <button class="btn-flag">Flag</button>
+                        <button class="btn-okay" >Okay</button>
+                    </td>
+                  </tr>
+            
+                  <tr>
+                    <td>8</td>
+                    <td>Bob Johnson</td>
+                    <td>Accommodation</td>
+                    <td>Hotel stay</td>
+                    <td>GBP</td>
+                    <td>300.00</td>
+                    <td>2024-01-20</td>
+                    <td>Yes</td>
+                    <td>
+                        <button class="btn-flag">Flag</button>
+                        <button class="btn-okay" >Okay</button>
+                    </td>
+                  </tr>
+            
+                  <tr>
+                    <td>9</td>
+                    <td>Alice Brown</td>
+                    <td>Transportation</td>
+                    <td>Taxi fare</td>
+                    <td>USD</td>
+                    <td>40.00</td>
+                    <td>2024-01-21</td>
+                    <td>No</td>
+                    <td>
+                        <button class="btn-flag" >Flag</button>
+                        <button class="btn-okay">Okay</button>
+                    </td>
+                  </tr>
+            
+                  <tr>
+                    <td>10</td>
+                    <td>Michael White</td>
+                    <td>Entertainment</td>
+                    <td>Concert tickets</td>
+                    <td>EUR</td>
+                    <td>75.00</td>
+                    <td>2024-01-22</td>
+                    <td>Yes</td>
+                    <td>
+                        <button class="btn-flag">Flag</button>
+                        <button class="btn-okay">Okay</button>
+                    </td>
+                  </tr> -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

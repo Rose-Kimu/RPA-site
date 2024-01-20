@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        body{
+            font-family: 'poppins', sans-serif;
+            background: rgb(187, 166, 148);
+            /* background: rgb(212, 114, 58); */
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        .nav-container{
+            background: rgb(212, 114, 58);
+            color: white;
+            padding: 0.5px 20px;
+            margin-bottom: 50px;
+        }
+
+        .nav-container h5{
+            font-size: 1.5rem;
+        }
+
+        .login-container{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .login-form{
+            width: 50%;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            padding: 16px 40px;
+            border-radius: 25px;
+        }
+
+        .form-group {
+            margin: 10px 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+        }
+
+        input, button, textarea, #selectMenu{
+            outline: none;
+            border: none;
+            background: #f5f5f5;
+        }
+
+        form input, form textarea, #selectMenu{
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .submit-button, .cancel-button{
+            width: 30%;
+            border-radius: 20px;
+            padding: 10px;
+            outline: none;
+            border: none;
+            margin-top: 30px;
+        }
+
+        .submit-button{
+            background:rgb(212, 114, 58);
+            color: white;
+        }
+
+        .cancel-button{
+            background:white;
+            color:rgb(212, 114, 58) ;
+            border: 1px solid  rgb(212, 114, 58);
+        }
+
+        form .header{
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .buttons{
+            display: flex;
+            gap: 50px;
+        }
+
+        .nav-bar{
+        display: flex;
+        align-items: center;
+        /* justify-content: space-between; */
+       }
+
+       .nav-bar h5{
+        margin-right: auto;
+       }
+
+       .nav-bar h4{
+        margin-right: 20px;
+       }
+
+       a{
+        text-decoration: none;
+        color: white;
+       }
+
+
+    </style>
+</head>
+<body>
+    <div class="nav-container">
+        <nav class="nav-bar">
+            <h5>RPA Exercise</h5>
+            <h4> <a href="{% url 'login_user' %}"> Home</a></h4>
+            <h4> <a href="{% url 'add_report_btn' %}"> Add new expense report</a></h4>
+            <h4> <a href= "{% url 'view_all_reports' %}">View all expense reports</a></h4>
+        </nav>
+    </div>
+    <div class="login-container">
+        <form class="login-form" action="{% url 'create_report' %} " method="post">
+            <!-- <div class="header">
+                <h3 class="header"> New Expense report</h3>
+            </div> -->
+            {% csrf_token %}
+            <!-- {{ form }} -->
+
+            <div class="form-group">
+                <label for="expense-id">Expense ID</label>
+                <!-- <input id="expense-id" name="expense-id" type="text" placeholder="Expense ID" value="{{ form.expense_id }}"> -->
+                {{form.expense_id}}
+            </div>
+
+            <div class="form-group">
+                <label for="employee-name">Employee Name</label>
+                <!-- <input id="employee-name" name="employee-name" type="text" placeholder="Employee Name" value="{{ form.employee_name.value }}"> -->
+                {{ form.employee_name}}
+            </div>
+
+            <div class="form-group">
+                <label for="expense-category">Expense Category</label>
+                <!-- <input id="expense-category" name="" type="text" placeholder="Expense Category" value="{{ form.expense_category.value }}"> -->
+                {{ form.expense_category }}
+            </div>
+
+            <div class="form-group">
+                <label for="expense-description">Expense Description</label>
+                <!-- <textarea name="expense-description" id="expense-description" rows="4" placeholder="Expense description">{{ form.description }}</textarea> -->
+                {{ form.description }}
+            </div>
+
+            <!-- <div class="form-group">
+                <label for="selectMenu">Currency</label>
+                <select id="selectMenu" name="dropdown"> 
+                    <option value="option1">{{ form.currency }}</option>
+                    {{ form.currency }}
+                </select>
+            </div> -->
+
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <!-- <input id="amount" name="" type="text" placeholder="Amount" value="{{ form.amount.value }}"> -->
+                {{ form.amount}}
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input id="date" name="date" type="date" placeholder="" value="{{ form.date.value }}">
+                <!-- {{ form.date}} -->
+            </div>
+
+            <div class="form-group">
+                <p>Receipt:</p>
+                <label>
+                    <input type="radio" name="receipt" value="yes" {% if form.receipt.value == 'yes' %}checked{% endif %} >
+                    Yes
+                </label>
+              
+                <label>
+                    <input type="radio" name="receipt" value="no" {% if form.receipt.value == 'no' %}checked{% endif %}>
+                    No
+                </label>
+            </div>
+
+            <div class="buttons">
+                <button class="cancel-button">Cancel</button>
+                <button type="submit" class="submit-button">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
